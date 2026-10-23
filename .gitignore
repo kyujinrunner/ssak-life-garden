@@ -1,0 +1,19 @@
+# 비밀정보와 개인별 설정
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+node_modules/
+.DS_Store
+Thumbs.db
+
+# 수업 원본 및 활동 기록은 이 공유 저장소에 포함하지 않습니다.
+*.hwp
+*.hwpx
+*.pptx
+*.pdf
+*.xlsx
+*.csv
+*.log
+*.zip
