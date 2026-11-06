@@ -322,10 +322,10 @@ const HELP={
  seed:{t:'전시회는 이렇게 열 수 있어요',body:()=>`<div class="hgrid g5">${EXS.map(e=>`<div class="hcard"><img src="${IMG[e.k]}" alt="${e.n} 예시 그림"><b>${e.n}</b><span>${e.d}</span></div>`).join('')}</div>
    <div class="htip" style="margin-bottom:12px">내 아이디어가 있으면 <b>내 아이디어</b> 씨앗을 골라도 돼요.</div>`},
  heart:{t:'어떤 생명을 위해 무엇을 할까요?',body:()=>`<div class="hgrid g4">${WHOS.map(w=>`<div class="hcard"><img src="${IMG[w.k]}" alt="${w.n} 그림"><b>${w.n} <em>(${w.c})</em></b><span>예) ${w.a}</span></div>`).join('')}</div>
-   <div class="htip" style="margin-bottom:12px"><b>전시회를 본 친구가 하면 좋을 행동</b>을 한 문장으로 써요. 창을 닫고, 내가 본 생명과 내가 고른 행동을 써 봐요.</div>`},
+   <div class="htip" style="margin-bottom:12px"><b>전시회를 본 친구가 하면 좋을 행동</b>을 한 문장으로 써요. 창을 닫고, ${S.scene[0]==='b'?'우리 모둠이 고른 생명과 행동':'내가 본 생명과 내가 고른 행동'}을 써 봐요.</div>`},
  check:{t:'점검할 때 이렇게 말해 봐요',body:()=>`<div class="hgrid g3">
    <div class="htip"><b>① 도움</b><br>예) 개미가 밟히지 않고 살 수 있어요<br>예) 꽃이 꺾이지 않고 계속 자랄 수 있어요</div>
-   <div class="htip"><b>② 친구 의견</b><br><b>고쳤어요</b> 예) 친구가 “글이 길어요”라고 해서 동생들도 읽을 수 있게 짧게 고쳤어요<br><b>그대로</b> 예) 친구가 “그림을 바꾸자”고 했지만, 고양이를 다치게 하지 않는 행동이 잘 보여서 그대로 해요</div>
+   <div class="htip"><b>② 친구 의견</b><br><b>고쳤어요</b> 예) 친구가 “글이 길어요”라고 해서 짧게 쓰기로 했어요<br><b>그대로</b> 예) 친구가 “다른 방법도 좋아요”라고 했지만, 지금 방법이 고양이를 다치게 하지 않는 행동을 잘 알려서 그대로 해요</div>
    <div class="htip"><b>③ 할 수 있나</b><br>예) 모둠 친구들과 도화지·색연필로 만들어 복도에 전시해요</div></div>`}
 };
 const helpBtn=k=>`<button class="btn white sm helpb" data-act="help" data-k="${k}">💡 생각 도우미</button>`;
@@ -335,7 +335,7 @@ function helpModal(k){const h=HELP[k];if(!h)return;closeModal();const m=document
 
 const REASONS=[
  {id:'r1',label:'생명은 하나뿐이에요',clause:'생명은 하나뿐이기 때문이에요'},
- {id:'r2',label:'정성과 노력으로 태어났어요',clause:'정성과 노력으로 태어난 소중한 존재이기 때문이에요'},
+ {id:'r2',label:'작은 생명도 모두 소중해요',clause:'작은 생명도 모두 소중하기 때문이에요'},
  {id:'r3',label:'한번 잃으면 되돌릴 수 없어요',clause:'한번 잃으면 되돌릴 수 없기 때문이에요'},
  {id:'r4',label:'우리와 함께 살아가요',clause:'우리와 함께 살아가는 존재이기 때문이에요'}];
 const tgPhrase=(arr)=>arr.includes('우리 모두')?'모든 생명을':arr.join(', ')+'의 생명을';
