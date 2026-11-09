@@ -793,13 +793,14 @@ function demo(){cancelWater();hint=null;
 }
 /* 크기 맞추기 */
 let kb=false,lastScale=1;
-function fit(){if(kb)return;lastScale=Math.min(innerWidth/1280,innerHeight/800);$('#stage').style.transform=`scale(${lastScale})`}
+function fit(){if(kb)return;const vv=window.visualViewport,w=vv?vv.width:innerWidth,h=vv?vv.height:innerHeight,ox=vv?vv.offsetLeft:0,oy=vv?vv.offsetTop:0;
+  lastScale=Math.min(w/1280,h/800);const st=$('#stage');st.style.left=(ox+w/2)+'px';st.style.top=(oy+h/2)+'px';st.style.transform=`scale(${lastScale})`}
 /* 화상 키보드: 입력 중에는 화면 크기를 다시 맞추지 않고, 입력 칸이 보이게 스크롤 */
 document.addEventListener('focusin',e=>{if(e.target.classList&&e.target.classList.contains('inp')){kb=true;document.body.classList.add('kb');
   setTimeout(()=>{try{e.target.scrollIntoView({block:'center',behavior:'smooth'})}catch(_){ }},300)}});
 document.addEventListener('focusout',e=>{if(e.target.classList&&e.target.classList.contains('inp')){setTimeout(()=>{if(!document.activeElement||!document.activeElement.classList.contains('inp')){kb=false;document.body.classList.remove('kb');window.scrollTo(0,0);fit()}},150)}});
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing&&e.keyCode!==229&&e.target.classList&&e.target.classList.contains('inp'))e.target.blur()});
-addEventListener('resize',fit);fit();
+addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,300));if(window.visualViewport)visualViewport.addEventListener('resize',fit);addEventListener('load',()=>{fit();setTimeout(fit,400);setTimeout(fit,1500)});fit();
 /* 느린 태블릿이면 저사양 모드로 자동 전환(움직임·번짐 효과 끔) */
 (function perf(){
   if(S.low||S.lowChecked)return;let n=0,t0=0,ts=[];
